@@ -1,115 +1,70 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    width: 280px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #1a1a2e;
-    color: #eaeaea;
-}
-
-/* Container */
-.container {
-    padding: 20px;
+/* Toggle Switch */
+.toggle-section {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-/* Header */
-.header {
-    text-align: center;
-    padding-bottom: 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
     border-bottom: 1px solid #2e2e4e;
 }
 
-.header h1 {
-    font-size: 20px;
-    font-weight: 700;
-    color: #7b8cde;
-    letter-spacing: 1px;
-}
-
-.header p {
-    font-size: 11px;
-    color: #888;
-    margin-top: 4px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-/* Section */
-.section {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.section label {
-    font-size: 12px;
+.toggle-label {
+    font-size: 13px;
     color: #aaa;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.section select {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid #2e2e4e;
-    background-color: #16213e;
-    color: #eaeaea;
-    font-size: 14px;
-    cursor: pointer;
-    outline: none;
-    transition: border 0.2s;
-}
-
-.section select:focus {
-    border-color: #7b8cde;
-}
-
-/* Save Button */
-#save-btn {
-    padding: 10px;
-    background-color: #7b8cde;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-#save-btn:hover {
-    background-color: #5a6abf;
-}
-
-/* Status */
-.status {
-    text-align: center;
+#toggle-status {
     font-size: 12px;
+    font-weight: 600;
     color: #4caf50;
-    padding: 6px;
-    border-radius: 6px;
-    background-color: #1e3a1e;
+    min-width: 55px;
+    text-align: right;
 }
 
-.hidden {
-    display: none;
+/* The switch container */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
 }
 
-/* Footer */
-.footer {
-    text-align: center;
-    padding-top: 12px;
-    border-top: 1px solid #2e2e4e;
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-.footer p {
-    font-size: 11px;
-    color: #666;
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #444;
+    border-radius: 24px;
+    transition: 0.3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+input:checked + .slider {
+    background-color: #7b8cde;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
 }
