@@ -1,0 +1,578 @@
+[
+  { text: 'It is 2011', duration: 5120, offset: 3760, lang: 'en' },
+  {
+    text: 'and Anonymous has just initiated',
+    duration: 5761,
+    offset: 6319,
+    lang: 'en'
+  },
+  {
+    text: 'Operation Darknet. This involved',
+    duration: 5120,
+    offset: 8880,
+    lang: 'en'
+  },
+  {
+    text: 'launching attacks against abuse',
+    duration: 4480,
+    offset: 12080,
+    lang: 'en'
+  },
+  {
+    text: 'websites, publicly shaming them, and',
+    duration: 4640,
+    offset: 14000,
+    lang: 'en'
+  },
+  {
+    text: 'calling their users disgusting',
+    duration: 3760,
+    offset: 16560,
+    lang: 'en'
+  },
+  { text: 'degenerates.', duration: 4639, offset: 18640, lang: 'en' },
+  {
+    text: 'This move was highly praised, but what',
+    duration: 4879,
+    offset: 20320,
+    lang: 'en'
+  },
+  {
+    text: "they didn't realize is that it",
+    duration: 5281,
+    offset: 23279,
+    lang: 'en'
+  },
+  {
+    text: 'unintentionally worked like an',
+    duration: 5201,
+    offset: 25199,
+    lang: 'en'
+  },
+  { text: 'advertisement.', duration: 3920, offset: 28560, lang: 'en' },
+  {
+    text: 'Anonymous was criticizing these',
+    duration: 4400,
+    offset: 30400,
+    lang: 'en'
+  },
+  {
+    text: 'websites, but they had also just made',
+    duration: 5040,
+    offset: 32480,
+    lang: 'en'
+  },
+  {
+    text: 'them famous in the process, and the news',
+    duration: 5759,
+    offset: 34800,
+    lang: 'en'
+  },
+  {
+    text: 'reached some of the wrong individuals.',
+    duration: 5359,
+    offset: 37520,
+    lang: 'en'
+  },
+  {
+    text: 'One of those people, known only by his',
+    duration: 4641,
+    offset: 40559,
+    lang: 'en'
+  },
+  {
+    text: 'username, Lux, began to download the',
+    duration: 4481,
+    offset: 42879,
+    lang: 'en'
+  },
+  {
+    text: 'tour browser, and he entered the dark',
+    duration: 4800,
+    offset: 45200,
+    lang: 'en'
+  },
+  {
+    text: 'web for the first time. He became',
+    duration: 5199,
+    offset: 47360,
+    lang: 'en'
+  },
+  {
+    text: 'intrigued by the horrific videos he',
+    duration: 4480,
+    offset: 50000,
+    lang: 'en'
+  },
+  {
+    text: 'found there, marking the start of an',
+    duration: 3840,
+    offset: 52559,
+    lang: 'en'
+  },
+  {
+    text: 'offender who would become one of the',
+    duration: 5040,
+    offset: 54480,
+    lang: 'en'
+  },
+  {
+    text: 'most depraved individuals to ever walk',
+    duration: 6000,
+    offset: 56399,
+    lang: 'en'
+  },
+  {
+    text: 'the earth. This is the story of the',
+    duration: 6080,
+    offset: 59520,
+    lang: 'en'
+  },
+  {
+    text: 'worldwide hunt for the king of Herdcore',
+    duration: 5281,
+    offset: 62399,
+    lang: 'en'
+  },
+  {
+    text: 'and the twisted man behind the online',
+    duration: 7080,
+    offset: 65600,
+    lang: 'en'
+  },
+  {
+    text: 'persona known as Lux.',
+    duration: 5000,
+    offset: 67680,
+    lang: 'en'
+  },
+  {
+    text: 'At first, I felt ashamed in myself for',
+    duration: 5919,
+    offset: 80880,
+    lang: 'en'
+  },
+  {
+    text: 'being attracted to such a thing, but as',
+    duration: 5120,
+    offset: 83840,
+    lang: 'en'
+  },
+  {
+    text: 'time went on, I slowly grew more',
+    duration: 5201,
+    offset: 86799,
+    lang: 'en'
+  },
+  {
+    text: 'accepting of myself. This is Lux',
+    duration: 6960,
+    offset: 88960,
+    lang: 'en'
+  },
+  {
+    text: 'describing his attraction to minors.',
+    duration: 6640,
+    offset: 92000,
+    lang: 'en'
+  },
+  {
+    text: 'When he accessed the dark web, he found',
+    duration: 5040,
+    offset: 95920,
+    lang: 'en'
+  },
+  {
+    text: 'an endless supply of videos of this',
+    duration: 5200,
+    offset: 98640,
+    lang: 'en'
+  },
+  {
+    text: 'type. And over time, it seems that he',
+    duration: 5439,
+    offset: 100960,
+    lang: 'en'
+  },
+  {
+    text: 'became desensitized to it. He quickly',
+    duration: 4880,
+    offset: 103840,
+    lang: 'en'
+  },
+  {
+    text: 'got to the point where he was quote able',
+    duration: 4080,
+    offset: 106399,
+    lang: 'en'
+  },
+  {
+    text: 'to feel comfortable with these',
+    duration: 3280,
+    offset: 108720,
+    lang: 'en'
+  },
+  { text: 'attractions.', duration: 4000, offset: 110479, lang: 'en' },
+  {
+    text: 'After fully submerging himself in the',
+    duration: 5360,
+    offset: 112000,
+    lang: 'en'
+  },
+  {
+    text: 'dark web, though, Lux actually began to',
+    duration: 6000,
+    offset: 114479,
+    lang: 'en'
+  },
+  {
+    text: 'complain. It seems that he was really',
+    duration: 5759,
+    offset: 117360,
+    lang: 'en'
+  },
+  {
+    text: 'bothered by two major problems that he',
+    duration: 5441,
+    offset: 120479,
+    lang: 'en'
+  },
+  {
+    text: 'had noticed on these websites. Problem',
+    duration: 5840,
+    offset: 123119,
+    lang: 'en'
+  },
+  {
+    text: 'number one is that they lacked proper',
+    duration: 5440,
+    offset: 125920,
+    lang: 'en'
+  },
+  {
+    text: 'security. And as a computer expert',
+    duration: 4561,
+    offset: 128959,
+    lang: 'en'
+  },
+  {
+    text: 'himself, he knew that they needed to do',
+    duration: 5040,
+    offset: 131360,
+    lang: 'en'
+  },
+  {
+    text: 'better. He was probably worried about',
+    duration: 5280,
+    offset: 133520,
+    lang: 'en'
+  },
+  {
+    text: 'getting caught as a user, but he also',
+    duration: 4240,
+    offset: 136400,
+    lang: 'en'
+  },
+  {
+    text: 'realized that the website owners would',
+    duration: 5120,
+    offset: 138800,
+    lang: 'en'
+  },
+  {
+    text: 'be very concerned about their anonymity.',
+    duration: 5520,
+    offset: 140640,
+    lang: 'en'
+  },
+  {
+    text: 'Therefore, he gladly offered up his',
+    duration: 4160,
+    offset: 143920,
+    lang: 'en'
+  },
+  {
+    text: 'technical skills to improve their',
+    duration: 3600,
+    offset: 146160,
+    lang: 'en'
+  },
+  {
+    text: 'security measures, and [music] this',
+    duration: 3680,
+    offset: 148080,
+    lang: 'en'
+  },
+  {
+    text: 'seemed to make his status rise very',
+    duration: 3759,
+    offset: 149760,
+    lang: 'en'
+  },
+  {
+    text: 'quickly to the point where his skills',
+    duration: 5360,
+    offset: 151760,
+    lang: 'en'
+  },
+  {
+    text: 'became in demand. After all, security',
+    duration: 5681,
+    offset: 153519,
+    lang: 'en'
+  },
+  {
+    text: 'had just become especially important',
+    duration: 4399,
+    offset: 157120,
+    lang: 'en'
+  },
+  {
+    text: 'because Operation Darknet was drawing so',
+    duration: 4880,
+    offset: 159200,
+    lang: 'en'
+  },
+  {
+    text: 'much attention from the general public.',
+    duration: 5201,
+    offset: 161519,
+    lang: 'en'
+  },
+  {
+    text: 'It seemed that Lux really enjoyed being',
+    duration: 5600,
+    offset: 164080,
+    lang: 'en'
+  },
+  {
+    text: 'in demand. And as time went on, he got',
+    duration: 5599,
+    offset: 166720,
+    lang: 'en'
+  },
+  {
+    text: 'even more inquiries from website owners.',
+    duration: 4960,
+    offset: 169680,
+    lang: 'en'
+  },
+  {
+    text: 'He went on to work on many of the top',
+    duration: 5041,
+    offset: 172319,
+    lang: 'en'
+  },
+  {
+    text: 'sites, and he even educated other users',
+    duration: 5120,
+    offset: 174640,
+    lang: 'en'
+  },
+  {
+    text: 'on how to do basic things like stripping',
+    duration: 5840,
+    offset: 177360,
+    lang: 'en'
+  },
+  {
+    text: 'the metadata out of video uploads. After',
+    duration: 6080,
+    offset: 179760,
+    lang: 'en'
+  },
+  {
+    text: 'gaining a little more notoriety, Lux',
+    duration: 5119,
+    offset: 183200,
+    lang: 'en'
+  },
+  {
+    text: 'decided it was time to tackle the second',
+    duration: 5039,
+    offset: 185840,
+    lang: 'en'
+  },
+  {
+    text: 'problem on his list. He was upset that',
+    duration: 7521,
+    offset: 188319,
+    lang: 'en'
+  },
+  {
+    text: "he couldn't find videos involving pain.",
+    duration: 7360,
+    offset: 190879,
+    lang: 'en'
+  },
+  {
+    text: 'A few months after entering the dark',
+    duration: 5119,
+    offset: 195840,
+    lang: 'en'
+  },
+  {
+    text: 'web, he had probably watched hundreds of',
+    duration: 5761,
+    offset: 198239,
+    lang: 'en'
+  },
+  {
+    text: 'videos, but since these sites had banned',
+    duration: 5761,
+    offset: 200959,
+    lang: 'en'
+  },
+  {
+    text: 'people from posting harm, it might have',
+    duration: 6480,
+    offset: 204000,
+    lang: 'en'
+  },
+  {
+    text: 'felt too vanilla for him. Lux wanted',
+    duration: 6480,
+    offset: 206720,
+    lang: 'en'
+  },
+  {
+    text: 'something extreme and because nobody',
+    duration: 5119,
+    offset: 210480,
+    lang: 'en'
+  },
+  {
+    text: 'else would do it, he began to develop',
+    duration: 4800,
+    offset: 213200,
+    lang: 'en'
+  },
+  {
+    text: 'his own suite of websites that would',
+    duration: 5280,
+    offset: 215599,
+    lang: 'en'
+  },
+  {
+    text: 'host this type of content. He thought',
+    duration: 5040,
+    offset: 218000,
+    lang: 'en'
+  },
+  {
+    text: 'that this would bring him even more fame',
+    duration: 4961,
+    offset: 220879,
+    lang: 'en'
+  },
+  {
+    text: 'and power within the community. And',
+    duration: 5440,
+    offset: 223040,
+    lang: 'en'
+  },
+  {
+    text: 'chillingly, he would turn out to be',
+    duration: 6880,
+    offset: 225840,
+    lang: 'en'
+  },
+  {
+    text: 'correct. In 2012, Lux published multiple',
+    duration: 6012,
+    offset: 228480,
+    lang: 'en'
+  },
+  {
+    text: 'sites of his own creation onto the',
+    duration: 4320,
+    offset: 232720,
+    lang: 'en'
+  },
+  {
+    text: '[music] dark web. These sites pioneered',
+    duration: 6228,
+    offset: 234492,
+    lang: 'en'
+  },
+  {
+    text: 'a relatively new genre called hurtcore,',
+    duration: 5919,
+    offset: 237040,
+    lang: 'en'
+  },
+  {
+    text: 'which comes from combining the two words',
+    duration: 5920,
+    offset: 240720,
+    lang: 'en'
+  },
+  {
+    text: 'hurt and hardcore. In addition, all of',
+    duration: 6640,
+    offset: 242959,
+    lang: 'en'
+  },
+  {
+    text: 'his sites were exclusively',
+    duration: 5200,
+    offset: 246640,
+    lang: 'en'
+  },
+  { text: 'CP.', duration: 4640, offset: 249599, lang: 'en' },
+  {
+    text: 'He quickly became known as the best',
+    duration: 4959,
+    offset: 251840,
+    lang: 'en'
+  },
+  {
+    text: 'source for such content, and hundreds of',
+    duration: 4641,
+    offset: 254239,
+    lang: 'en'
+  },
+  {
+    text: 'users flooded in to watch all of the',
+    duration: 5441,
+    offset: 256799,
+    lang: 'en'
+  },
+  {
+    text: 'videos. I cannot really add any more',
+    duration: 5039,
+    offset: 258880,
+    lang: 'en'
+  },
+  {
+    text: 'detail about the stuff that was being',
+    duration: 4640,
+    offset: 262240,
+    lang: 'en'
+  },
+  {
+    text: 'posted, but you can basically just',
+    duration: 5921,
+    offset: 263919,
+    lang: 'en'
+  },
+  {
+    text: 'assume it was the worst type of criminal',
+    duration: 6319,
+    offset: 266880,
+    lang: 'en'
+  },
+  {
+    text: 'content imaginable. It was accurately',
+    duration: 8359,
+    offset: 269840,
+    lang: 'en'
+  },
+  {
+    text: 'described this way in a Vice headline.',
+    duration: 5000,
+    offset: 273199,
+    lang: 'en'
+  },
+  ... 677 more items
+]

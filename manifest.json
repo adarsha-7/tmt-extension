@@ -3,15 +3,9 @@
     "name": "TMT Trilingual Translator",
     "version": "1.0",
     "description": "Translate between English, Nepali, and Tamang in real-time",
-    "permissions": ["activeTab", "storage", "contextMenus","identity", "http://localhost:3000/*"],
+    "permissions": ["activeTab", "storage", "contextMenus", "http://localhost:3000/*"],
     "host_permissions": ["https://tmt.ilprl.ku.edu.np/*"],
      "permissions": ["identity"],
-     "oauth2": {
-       "client_id": "YOUR_CLIENT_ID.apps.googleusercontent.com",
-       "scopes": [
-         "https://www.googleapis.com/auth/youtube.readonly"
-       ]
-     }
     "background": {
         "scripts": ["background.js"],
         "persistent": false
