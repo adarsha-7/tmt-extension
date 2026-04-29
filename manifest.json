@@ -1,12 +1,12 @@
 {
-    "manifest_version": 3,
+    "manifest_version": 2,
     "name": "TMT Trilingual Translator",
     "version": "1.0",
     "description": "Translate between English, Nepali, and Tamang in real-time",
-    "permissions": ["activeTab", "storage", "contextMenus"],
-    "host_permissions": ["https://tmt.ilprl.ku.edu.np/*"],
+    "permissions": ["activeTab", "storage", "contextMenus", "https://tmt.ilprl.ku.edu.np/*"],
     "background": {
-        "service_worker": "background.js"
+        "scripts": ["background.js"],
+        "persistent": false
     },
     "content_scripts": [
         {
@@ -14,7 +14,7 @@
             "js": ["content.js"]
         }
     ],
-    "action": {
+    "browser_action": {
         "default_popup": "popup/popup.html",
         "default_icon": {
             "16": "icons/icon16.png",
