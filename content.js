@@ -59,10 +59,10 @@ function showTooltip(x, y, text) {
         left: `${x}px`,
         backgroundColor: "#1a1a2e",
         color: "#eaeaea",
-        padding: "10px 14px",
+        padding: "16px 20px", // was 10px 14px
         borderRadius: "8px",
-        fontSize: "14px",
-        maxWidth: "300px",
+        fontSize: "16px", // was 14px
+        maxWidth: "500px", // was 300px
         boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
         border: "1px solid #7b8cde",
         zIndex: "999999",
