@@ -1,5 +1,4 @@
-const API_URL = "https://tmt.ilprl.ku.edu.np/lang-translate";
-const API_TOKEN = "team_522691d14915f970";
+const API_URL = "http://localhost:3000/translate";
 
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "translate") {
@@ -16,16 +15,15 @@ async function translateText(text, src_lang, tgt_lang) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${API_TOKEN}`,
         },
         body: JSON.stringify({ text, src_lang, tgt_lang }),
     });
 
     const data = await response.json();
 
-    if (data.message_type === "SUCCESS") {
-        return data.output;
+    if (data.success) {
+        return data.translation;
     } else {
-        throw new Error(data.message || "Translation failed");
+        throw new Error(data.error || "Translation failed");
     }
 }

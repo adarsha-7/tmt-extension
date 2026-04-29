@@ -3,7 +3,7 @@
     "name": "TMT Trilingual Translator",
     "version": "1.0",
     "description": "Translate between English, Nepali, and Tamang in real-time",
-    "permissions": ["activeTab", "storage", "contextMenus", "https://tmt.ilprl.ku.edu.np/*"],
+    "permissions": ["activeTab", "storage", "contextMenus", "http://localhost:3000/*"],
     "background": {
         "scripts": ["background.js"],
         "persistent": false
