@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TMT Translator</title>
+        <link rel="stylesheet" href="popup.css" />
+    </head>
+    <body>
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <h1>TMT Translator</h1>
+                <p>Trilingual · Real-time · Web</p>
+            </div>
+
+            <!-- Language Selection -->
+            <div class="section">
+                <label for="src-lang">Translate From</label>
+                <select id="src-lang">
+                    <option value="en">English</option>
+                    <option value="ne">Nepali</option>
+                    <option value="tmg">Tamang</option>
+                </select>
+            </div>
+
+            <div class="section">
+                <label for="tgt-lang">Translate To</label>
+                <select id="tgt-lang">
+                    <option value="ne">Nepali</option>
+                    <option value="en">English</option>
+                    <option value="tmg">Tamang</option>
+                </select>
+            </div>
+
+            <!-- Save Button -->
+            <button id="save-btn">Save Settings</button>
+
+            <!-- Status Message -->
+            <div id="status" class="status hidden">Settings saved!</div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <p>Highlight any text on a webpage to translate</p>
+            </div>
+        </div>
+        <script src="popup.js"></script>
+    </body>
+</html>
