@@ -325,10 +325,7 @@ function injectOverlay() {
 function syncSubtitles(transcripts) {
   const video = document.querySelector("video");
   const overlay = document.getElementById("yt-translation-overlay");
-
   if (!video || !overlay) return;
-
-  let index = 0;
 
   if (currentListener) {
     video.removeEventListener("timeupdate", currentListener);
@@ -337,20 +334,16 @@ function syncSubtitles(transcripts) {
   currentListener = () => {
     const currentTime = video.currentTime * 1000;
 
-    while (
-      index < transcripts.length - 1 &&
-      currentTime > transcripts[index].offset + transcripts[index].duration
-    ) {
-      index++;
-    }
+    const t = transcripts.find(
+      (seg) =>
+        currentTime >= seg.offset && currentTime <= seg.offset + seg.duration,
+    );
 
-    const t = transcripts[index];
-
-    if (currentTime >= t.offset && currentTime <= t.offset + t.duration) {
+    if (t) {
       overlay.innerHTML = `
-  <div>${t.text}</div>
-  <div style="font-size:16px; opacity:0.8;">${t.translatedText}</div>
-`;
+        <div>${t.text}</div>
+        <div style="font-size:16px; opacity:0.8;">${t.translatedText}</div>
+      `;
     } else {
       overlay.textContent = "";
     }
