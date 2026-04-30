@@ -1,21 +1,21 @@
+const createTranscriptChunks = require("../utils/transcriptChunks");
 const { extractCaption } = require("../utils/transcritpsExtracter");
 
-const CHUNK_SIZE = 100;
+const CHUNK_SIZE = 10;
 
-function translateTranscript(req,res){
+async function translateTranscript(req,res){
 
 	const { videoId , targetedLang } = req.query;
-	const transcripts = extractCaption(videoId);
-	const transcriptChunks  = createTranscriptChunks(transcripts);
-	console.log(transcriptChunks.length);
+	const transcripts = await extractCaption(videoId);
+
+    if (!transcripts || transcripts.length === 0) {
+        return res.status(400).json({ error: "No transcript found for this video." });
+    }
+	console.log(typeof transcripts)
+    const transcriptChunks = createTranscriptChunks(transcripts);
+
+    console.log(transcriptChunks);
 }
 
-function createTranscriptChunks(transcripts){
-	const transcriptChunks = [];
-	for(let i = 0; i < transcripts.length; i+= CHUNK_SIZE){
-		transcriptChunks.push(transcripts.slice( i, i + CHUNK_SIZE ));
-	}
-	return transcriptChunks;
-}
 
 module.exports = { translateTranscript };
