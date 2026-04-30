@@ -1,14 +1,15 @@
-const { YoutubeTranscript } = require("youtube-transcript")
+const { YoutubeTranscript } = require("youtube-transcript");
 
-async function extractCaption(videoID) {
-    try {
-        const transcript = await YoutubeTranscript.fetchTranscript(videoID,);
-        return transcript;
-    } catch (err) {
-        console.error("Failed:", err.message);
-    }
+async function extractCaption(videoID, targetedLang) {
+  try {
+    const transcript = await YoutubeTranscript.fetchTranscript(videoID, {
+      lang: targetedLang,
+    });
+    return transcript;
+  } catch (err) {
+    console.error("Failed:", err.message);
+  }
 }
-
 
 extractCaption("cOAaonpTLlc");
 

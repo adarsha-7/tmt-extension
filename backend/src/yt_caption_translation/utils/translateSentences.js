@@ -1,0 +1,51 @@
+require("dotenv").config();
+const { default: axios } = require("axios");
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function translateSentences(transcriptAsSentence, targetedLang = "ne") {
+  const results = [];
+
+  for (const text of transcriptAsSentence) {
+    const response = await translationAPI(text.text, "en", targetedLang);
+
+    results.push({
+      translatedText: response,
+      ...text,
+    });
+
+    await sleep(50);
+  }
+
+  return results;
+}
+
+async function translationAPI(text, src_lang = "en", tgt_lang) {
+  try {
+    const response = await axios.post(
+      process.env.TMT_API_URL,
+      { text, src_lang, tgt_lang },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.TMT_API_TOKEN}`,
+        },
+      },
+    );
+
+    const data = response.data;
+
+    if (data.message_type === "SUCCESS") {
+      return data.output;
+    }
+
+    return null;
+  } catch (err) {
+    console.error("Translation error:", err.message);
+    return null;
+  }
+}
+
+module.exports = translateSentences;
