@@ -4,7 +4,28 @@ function createTranscriptChunks(transcripts) {
   let currentChunk = [];
 
   for (const chunk of transcripts) {
-    sentenceString += chunk.text + " ";
+    if (
+      chunk.text.trim().match(/^\(.*\)$/) ||
+      chunk.text.trim().match(/^\[.*\]$/)
+    ) {
+      if (sentenceString.trim()) {
+        sentenceGroup.push({
+          text: sentenceString.trim(),
+          chunks: [...currentChunk],
+        });
+        sentenceString = "";
+        currentChunk = [];
+      }
+      sentenceGroup.push({
+        text: chunk.text,
+        chunks: [chunk],
+        passthrough: true,
+      });
+      continue;
+    }
+
+    const cleanText = chunk.text.replace(/^-\s*/, "");
+    sentenceString += cleanText + " ";
     sentenceString = sentenceString.replace(/\n/g, " ").replace(/\.\.\./g, "…");
     currentChunk.push(chunk);
 
@@ -27,6 +48,7 @@ function createTranscriptChunks(transcripts) {
   if (sentenceString.trim()) {
     sentenceGroup.push({ text: sentenceString.trim(), chunks: currentChunk });
   }
+
   return sentenceGroup;
 }
 

@@ -1,3 +1,4 @@
+const distributeTranscripts = require("../utils/distributeTranscripts");
 const createTranscriptChunks = require("../utils/transcriptChunks");
 const { extractCaption } = require("../utils/transcritpsExtracter");
 const translateSentences = require("../utils/translateSentences");
@@ -20,11 +21,14 @@ async function translateTranscript(req, res) {
 
   if (videoLength <= VIDEO_LENGTH_THRESHOLD) {
     const transcriptsAsSentences = createTranscriptChunks(transcripts);
-    console.log(transcriptsAsSentences.slice(0, 10));
     const translatedTranscripts = await translateSentences(
       transcriptsAsSentences,
     );
-    console.log(translatedTranscripts.slice(0, 10));
+    const distributedChunks = distributeTranscripts(translatedTranscripts);
+    return res.status(200).json({
+      success: true,
+      transcript: distributedChunks,
+    });
   }
 }
 

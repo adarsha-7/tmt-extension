@@ -8,15 +8,18 @@ function sleep(ms) {
 async function translateSentences(transcriptAsSentence, targetedLang = "ne") {
   const results = [];
 
-  for (const text of transcriptAsSentence) {
-    const response = await translationAPI(text.text, "en", targetedLang);
+  for (const group of transcriptAsSentence) {
+    if (group.passthrough) {
+      results.push({ translatedText: group.text, ...group });
+      continue;
+    }
 
+    const response = await translationAPI(group.text, "en", targetedLang);
     results.push({
       translatedText: response,
-      ...text,
+      ...group,
     });
-
-    await sleep(50);
+    await sleep(500);
   }
 
   return results;
