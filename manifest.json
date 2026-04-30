@@ -4,6 +4,8 @@
     "version": "1.0",
     "description": "Translate between English, Nepali, and Tamang in real-time",
     "permissions": ["activeTab", "storage", "contextMenus", "http://localhost:3000/*"],
+    "host_permissions": ["https://tmt.ilprl.ku.edu.np/*"],
+     "permissions": ["identity"],
     "background": {
         "scripts": ["background.js"],
         "persistent": false

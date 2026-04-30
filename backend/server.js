@@ -3,23 +3,24 @@ const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
 
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
+const transcriptRouter = require("./src/yt_caption_translation/routes/tanscriptRoute")
+
 app.use(cors());
 app.use(express.json());
 
-// Health check route
+app.use('/api/translate/yt',transcriptRouter);
+
 app.get("/", (req, res) => {
     res.json({ status: "TMT Proxy Server is running!" });
 });
 
-// Translation route
 app.post("/translate", async (req, res) => {
     const { text, src_lang, tgt_lang } = req.body;
 
-    // Validate inputs
     if (!text || !src_lang || !tgt_lang) {
         return res.status(400).json({
             success: false,
