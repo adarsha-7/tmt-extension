@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const ocrHandler = require("./imageTranslation/routers/imageTranslationRoute.js")
+const ocrHandler = require("./src/imageTranslation/routers/imageTranslationRoute.js")
 const axios = require("axios");
 
 
