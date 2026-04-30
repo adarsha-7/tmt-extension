@@ -1,7 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const ocrHandler = require("./imageTranslation/routers/imageTranslationRoute.js")
 const axios = require("axios");
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,6 +16,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.json({ status: "TMT Proxy Server is running!" });
 });
+
+app.use("/ocr", ocrHandler)
 
 // Translation route
 app.post("/translate", async (req, res) => {
