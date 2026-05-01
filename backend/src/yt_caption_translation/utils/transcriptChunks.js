@@ -4,6 +4,7 @@ function createTranscriptChunks(transcripts) {
   let currentChunk = [];
 
   for (const chunk of transcripts) {
+    //handle anything wrapped in parenthesis
     if (
       chunk.text.trim().match(/^\(.*\)$/) ||
       chunk.text.trim().match(/^\[.*\]$/)
@@ -24,6 +25,7 @@ function createTranscriptChunks(transcripts) {
       continue;
     }
 
+    //remove '-'
     const cleanText = chunk.text.replace(/^-\s*/, "");
     sentenceString += cleanText + " ";
     sentenceString = sentenceString.replace(/\n/g, " ").replace(/\.\.\./g, "…");
