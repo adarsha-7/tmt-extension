@@ -30,7 +30,7 @@ async function translationAPI(
   text,
   src_lang = "en",
   tgt_lang,
-  max_retries = 3,
+  max_retries = 5,
 ) {
   for (let attempt = 0; attempt < max_retries; attempt++) {
     try {
