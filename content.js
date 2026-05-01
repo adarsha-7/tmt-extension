@@ -270,7 +270,6 @@ const observer = new MutationObserver((mutations) => {
 });
 
 observer.observe(document.body, { childList: true, subtree: true });
-
 //youtube-part
 let lastVideoId = null;
 let currentListener = null;
@@ -342,7 +341,8 @@ function syncSubtitles(transcripts) {
       ? `<div>${t.text}</div><div style="font-size:16px;opacity:0.8;">${t.translatedText}</div>`
       : "";
   };
-
+  {
+  }
   video.addEventListener("timeupdate", currentListener);
 }
 

@@ -2,11 +2,9 @@ const API_URL = "http://localhost:3000/translate";
 
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "translate") {
-        translateText(request.text, request.src_lang, request.tgt_lang)
-            .then((result) => sendResponse({ success: true, translation: result }))
-            .catch((err) => sendResponse({ success: false, error: err.message }));
-
-        return true;
+        return translateText(request.text, request.src_lang, request.tgt_lang)
+            .then((result) => ({ success: true, translation: result }))
+            .catch((err) => ({ success: false, error: err.message }));
     }
 });
 
