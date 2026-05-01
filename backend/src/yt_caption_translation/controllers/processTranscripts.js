@@ -19,17 +19,17 @@ async function translateTranscript(req, res) {
   const videoLength =
     transcripts.at(-1)?.offset + transcripts.at(-1)?.duration ?? 0;
 
-  if (videoLength <= VIDEO_LENGTH_THRESHOLD) {
-    const transcriptsAsSentences = createTranscriptChunks(transcripts);
-    const translatedTranscripts = await translateSentences(
-      transcriptsAsSentences,
-    );
-    const distributedChunks = distributeTranscripts(translatedTranscripts);
-    return res.status(200).json({
-      success: true,
-      transcript: distributedChunks,
-    });
-  }
+  // if (videoLength <= VIDEO_LENGTH_THRESHOLD) {
+  const transcriptsAsSentences = createTranscriptChunks(transcripts);
+  const translatedTranscripts = await translateSentences(
+    transcriptsAsSentences,
+  );
+  const distributedChunks = distributeTranscripts(translatedTranscripts);
+  return res.status(200).json({
+    success: true,
+    transcript: distributedChunks,
+  });
+  // }
 }
 
 module.exports = { translateTranscript };

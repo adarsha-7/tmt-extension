@@ -276,50 +276,54 @@ const observer = new MutationObserver((mutations) => {
 observer.observe(document.body, { childList: true, subtree: true });
 
 //youtube-part
-let lastUrl = location.href;
+let lastVideoId = null;
 let currentListener = null;
 
-// OBSERVER
+// OBSERVER — watch for URL changes
 new MutationObserver(() => {
-  if (location.href !== lastUrl) {
-    lastUrl = location.href;
-    setTimeout(init, 1000);
+  const url = new URL(location.href);
+  const videoId = url.searchParams.get("v");
+  if (videoId && videoId !== lastVideoId) {
+    lastVideoId = videoId;
+    setTimeout(() => init(videoId), 1500); // give YT time to settle
   }
 }).observe(document, { subtree: true, childList: true });
 
-// INIT
-init();
+// Initial load
+const _initialId = new URL(location.href).searchParams.get("v");
+if (_initialId) {
+  lastVideoId = _initialId;
+  init(_initialId);
+}
+
 function createOverlay() {
   const overlay = document.createElement("div");
-
   overlay.id = "yt-translation-overlay";
-  overlay.style.position = "absolute";
-  overlay.style.bottom = "10%";
-  overlay.style.width = "100%";
-  overlay.style.textAlign = "center";
-  overlay.style.fontSize = "20px";
-  overlay.style.fontWeight = "bold";
-  overlay.style.color = "#fff";
-  overlay.style.textShadow = "2px 2px 6px rgba(0,0,0,0.8)";
-  overlay.style.zIndex = "9999";
-
-  setTimeout(init, 1500);
-  overlay.style.pointerEvents = "none";
-
+  overlay.style.cssText = `
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+    z-index: 9999;
+    pointer-events: none;
+  `;
   return overlay;
 }
 
 function injectOverlay() {
   const player = document.querySelector(".html5-video-player");
-
   if (!player) return;
 
-  let overlay = document.getElementById("yt-translation-overlay");
+  // Always remove stale overlay and re-inject fresh
+  const existing = document.getElementById("yt-translation-overlay");
+  if (existing) existing.remove();
 
-  if (!overlay) {
-    overlay = createOverlay();
-    player.appendChild(overlay);
-  }
+  const overlay = createOverlay();
+  player.appendChild(overlay);
 }
 
 function syncSubtitles(transcripts) {
@@ -329,49 +333,38 @@ function syncSubtitles(transcripts) {
 
   if (currentListener) {
     video.removeEventListener("timeupdate", currentListener);
+    currentListener = null;
   }
 
   currentListener = () => {
     const currentTime = video.currentTime * 1000;
-
     const t = transcripts.find(
       (seg) =>
         currentTime >= seg.offset && currentTime <= seg.offset + seg.duration,
     );
-
-    if (t) {
-      overlay.innerHTML = `
-        <div>${t.text}</div>
-        <div style="font-size:16px; opacity:0.8;">${t.translatedText}</div>
-      `;
-    } else {
-      overlay.textContent = "";
-    }
+    overlay.innerHTML = t
+      ? `<div>${t.text}</div><div style="font-size:16px;opacity:0.8;">${t.translatedText}</div>`
+      : "";
   };
 
   video.addEventListener("timeupdate", currentListener);
 }
 
-async function init() {
+async function init(videoId) {
   try {
-    const url = new URL(window.location.href);
-    const videoId = url.searchParams.get("v");
-
     if (!videoId) return;
 
-    injectOverlay();
+    injectOverlay(); // fresh overlay, clears stale content immediately
 
     const res = await fetch(
       `http://localhost:3000/api/translate/yt?videoId=${videoId}&targetedLang=en`,
     );
-
     if (!res.ok) throw new Error("API failed");
 
     const data = await res.json();
-    console.log(data);
-
     if (!data.success) return;
 
+    console.log(data.transcript);
     syncSubtitles(data.transcript);
   } catch (err) {
     console.error("Init error:", err);
