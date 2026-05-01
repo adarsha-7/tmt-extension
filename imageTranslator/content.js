@@ -9,11 +9,25 @@ chrome.runtime.onMessage.addListener((msg) => {
     handleTranslation(msg.src, msg.sourceLang, msg.targetLang);
   }
 });
+async function imageToBase64(imgEl) {
+  await waitForImage(imgEl);
+  try {
+    const canvas = document.createElement("canvas");
+    canvas.width  = imgEl.naturalWidth;
+    canvas.height = imgEl.naturalHeight;
+    canvas.getContext("2d").drawImage(imgEl, 0, 0);
+    console.log(canvas.toDataURL("image/png"))
+    return canvas.toDataURL("image/png");
+  } catch (e) {
+    console.warn("[ImageTranslator] Canvas tainted, falling back to URL", e);
+    return imgEl.src;
+  }
+}
 
 async function handleTranslation(src, sourceLang, targetLang) {
   const imgEl = findImageBySrc(src);
   if (!imgEl) { showToast("Could not locate the image on the page.", "error"); return; }
-
+    const base64 = await imageToBase64(imgEl);
   removeOverlay(imgEl);
   const loader = showLoader(imgEl);
 
@@ -23,7 +37,7 @@ async function handleTranslation(src, sourceLang, targetLang) {
     const ocrRes = await fetch(OCR_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ src  , sourceLang : sourceLang}),
+      body: JSON.stringify({ src : base64, sourceLang }),
     });
     if (!ocrRes.ok) throw new Error(`OCR failed: ${ocrRes.status}`);
     const ocrData = await ocrRes.json();
@@ -69,6 +83,25 @@ function waitForImage(imgEl) {
   });
 }
 
+function fitTextToBbox(span, boxWidth, boxHeight) {
+     const maxWidth  = boxWidth  - 4;
+  const maxHeight = boxHeight - 2;
+
+  let lo = 14, hi = Math.min(boxHeight, 72);
+
+  for (let i = 0; i < 12; i++) {  // more iterations = more accurate
+    const mid = (lo + hi) / 2;
+    span.style.fontSize = mid + "px";
+    if (span.scrollWidth <= maxWidth && span.scrollHeight <= maxHeight) {
+      lo = mid;  // fits, try bigger
+    } else {
+      hi = mid;  // too big, go smaller
+    }
+  }
+
+  span.style.fontSize = lo + "px";
+}
+
 function drawOverlays(imgEl, lines) {
   const scaleX = imgEl.clientWidth  / imgEl.naturalWidth;
   const scaleY = imgEl.clientHeight / imgEl.naturalHeight;
@@ -96,10 +129,13 @@ function drawOverlays(imgEl, lines) {
     box.style.cssText = `position:absolute;left:${left}px;top:${top}px;width:${width}px;height:${height}px;background:rgba(0,0,0,0.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;border-radius:3px;padding:1px 3px;box-sizing:border-box;pointer-events:none;z-index:9999`;
 
     const span = document.createElement("span");
-    span.style.cssText = `color:white;font-size:${Math.max(9, height * 0.65)}px;font-family:sans-serif;line-height:1.2;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%`;
+    span.style.cssText = `color:white;font-family:sans-serif;line-height:1.2;text-align:center;white-space:nowrap;display:block;max-width:100%;overflow:hidden;word-break:break-word;white-space:normal;`;
     span.textContent = line.translated;
     box.appendChild(span);
     wrapper.appendChild(box);
+
+    // Must be appended to DOM first before measuring
+    fitTextToBbox(span, width, height);
   }
 }
 
