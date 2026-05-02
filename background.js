@@ -8,7 +8,7 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-async function translateText(text, src_lang, tgt_lang, retries = 2) {
+async function translateText(text, src_lang, tgt_lang, retries = 4) {
     try {
         const response = await fetch(API_URL, {
             method: "POST",
