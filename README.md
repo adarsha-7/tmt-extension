@@ -14,11 +14,11 @@ English ↔ Nepali · English ↔ Tamang · Nepali ↔ Tamang
 
 ## Architecture Overview
 
-Firefox Extension
-↓
-Express Proxy Server (localhost:3000)
-↓
-TMT Translation API (tmt.ilprl.ku.edu.np)
+Firefox Extension  
+↓  
+Express Proxy Server (localhost:3000)  
+↓  
+TMT Translation API (tmt.ilprl.ku.edu.np)  
 
 The extension never talks to the TMT API directly. All requests go through a local Express proxy server which keeps the API token secure and handles retries and error management.
 
