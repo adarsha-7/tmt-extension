@@ -8,20 +8,28 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-async function translateText(text, src_lang, tgt_lang) {
-    const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text, src_lang, tgt_lang }),
-    });
+async function translateText(text, src_lang, tgt_lang, retries = 2) {
+    try {
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ text, src_lang, tgt_lang }),
+        });
 
-    const data = await response.json();
+        const data = await response.json();
 
-    if (data.success) {
-        return data.translation;
-    } else {
-        throw new Error(data.error || "Translation failed");
+        if (data.success) {
+            return data.translation;
+        } else {
+            throw new Error(data.error || "Translation failed");
+        }
+    } catch (err) {
+        if (retries > 0) {
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            return translateText(text, src_lang, tgt_lang, retries - 1);
+        }
+        throw err;
     }
 }
