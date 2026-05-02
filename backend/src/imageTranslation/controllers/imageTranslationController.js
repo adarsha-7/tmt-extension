@@ -133,35 +133,51 @@ const languageTranslate = async (req, res) => {
   }
 }
 
-async function TranslationAPI(text, sourceLang, targetLang) {
+async function TranslationAPI(text, sourceLang, targetLang, retries = 3, baseDelay = 500) {
   // added: warn early if token is missing
   if (!process.env.TMT_API_TOKEN) {
     throw new Error("TMT_API_TOKEN is not set in environment variables")
   }
 
   let authorization = `Bearer ${process.env.TMT_API_TOKEN}`
-  const response = await fetch("https://tmt.ilprl.ku.edu.np/lang-translate", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": authorization
-    },
-    body: JSON.stringify({
-      text: text,
-      src_lang: sourceLang,
-      tgt_lang: targetLang
-    })
-  });
+  let lastError
 
-  // added: check content-type before parsing — HTML error pages blow up on .json()
-  const contentType = response.headers.get("content-type") || ""
-  if (!contentType.includes("application/json")) {
-    const rawText = await response.text()
-    throw new Error(`TranslationAPI returned non-JSON (status ${response.status}): ${rawText.substring(0, 200)}`)
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const response = await fetch("https://tmt.ilprl.ku.edu.np/lang-translate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": authorization
+        },
+        body: JSON.stringify({
+          text: text,
+          src_lang: sourceLang,
+          tgt_lang: targetLang
+        })
+      });
+
+      // added: check content-type before parsing — HTML error pages blow up on .json()
+      const contentType = response.headers.get("content-type") || ""
+      if (!contentType.includes("application/json")) {
+        const rawText = await response.text()
+        throw new Error(`TranslationAPI returned non-JSON (status ${response.status}): ${rawText.substring(0, 200)}`)
+      }
+
+      const data = await response.json();
+      return data.output
+
+    } catch (err) {
+      lastError = err
+      if (attempt < retries) {
+        const delay = baseDelay * Math.pow(2, attempt) // 500ms, 1000ms, 2000ms
+        console.warn(`TranslationAPI attempt ${attempt + 1} failed, retrying in ${delay}ms... (${err.message})`)
+        await new Promise((resolve) => setTimeout(resolve, delay))
+      }
+    }
   }
 
-  const data = await response.json();
-  return data.output
+  throw new Error(`TranslationAPI failed after ${retries + 1} attempts: ${lastError.message}`)
 }
 
 module.exports = { imageTranslationHandler, languageTranslate }
