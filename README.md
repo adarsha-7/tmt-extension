@@ -51,22 +51,22 @@ Translate text directly inside any input field on any website — comment boxes,
 
 ## Project Structure
 
-tmt-extension/
-├── manifest.json # Extension config (Firefox MV2)
-├── background.js # Handles API calls and retries
-├── content.js # Injected into webpages — all UI logic
-├── popup/
-├── icons/
-└── backend/ # Express proxy server
-└── package.json
+tmt-extension/  
+├── manifest.json # Extension config (Firefox MV2)  
+├── background.js # Handles API calls and retries  
+├── content.js # Injected into webpages — all UI logic  
+├── popup/  
+├── icons/  
+└── backend/ # Express proxy server  
+└── package.json  
 
 ---
 
 ## Built With
 
-- Firefox WebExtensions API (Manifest V2)
-- Node.js + Express
-- TMT Translation API — Google TMT, KU ILPRL
+- Firefox WebExtensions API (Manifest V2)  
+- Node.js + Express  
+- TMT Translation API — Google TMT, KU ILPRL  
 
 ---
 
