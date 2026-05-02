@@ -103,17 +103,29 @@ const languageTranslate = async (req, res) => {
   try {
     const { lines, sourceLang, targetLang } = req.body
     const translated = await Promise.all(
-      lines.map(async (line) => ({
-        original: line.text,
-        translated: await TranslationAPI(line.text, sourceLang, targetLang),
-        bbox: line.bbox
-      }))
+      lines.map(async (line) => {
+        try {
+          return {
+            original: line.text,
+            translated: await TranslationAPI(line.text, sourceLang, targetLang),
+            bbox: line.bbox
+          }
+        } catch (err) {
+          console.error(`Failed to translate line "${line.text}":`, err.message)
+          // fallback to original text so one bad line doesn't kill everything
+          return {
+            original: line.text,
+            translated: line.text,
+            bbox: line.bbox
+          }
+        }
+      })
     )
     console.log(JSON.stringify(translated, null, 2))
     return res.status(200).json({ lines: translated })
   } catch (err) {
-    console.error("languageTranslate error:", err.message)
-    console.error(err.stack)
+    console.log("languageTranslate error:", err.message)
+    console.log(err.message)
     return res.status(500).json({
       success: false,
       msg: err.message
@@ -122,6 +134,11 @@ const languageTranslate = async (req, res) => {
 }
 
 async function TranslationAPI(text, sourceLang, targetLang) {
+  // added: warn early if token is missing
+  if (!process.env.TMT_API_TOKEN) {
+    throw new Error("TMT_API_TOKEN is not set in environment variables")
+  }
+
   let authorization = `Bearer ${process.env.TMT_API_TOKEN}`
   const response = await fetch("https://tmt.ilprl.ku.edu.np/lang-translate", {
     method: "POST",
@@ -135,6 +152,14 @@ async function TranslationAPI(text, sourceLang, targetLang) {
       tgt_lang: targetLang
     })
   });
+
+  // added: check content-type before parsing — HTML error pages blow up on .json()
+  const contentType = response.headers.get("content-type") || ""
+  if (!contentType.includes("application/json")) {
+    const rawText = await response.text()
+    throw new Error(`TranslationAPI returned non-JSON (status ${response.status}): ${rawText.substring(0, 200)}`)
+  }
+
   const data = await response.json();
   return data.output
 }
