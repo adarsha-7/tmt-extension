@@ -338,7 +338,7 @@ function syncSubtitles(transcripts) {
         currentTime >= seg.offset && currentTime <= seg.offset + seg.duration,
     );
     overlay.innerHTML = t
-      ? `<div>${t.text}</div><div style="font-size:16px;opacity:0.8;">${t.translatedText}</div>`
+      ? `<div style="opacity:0.8,font-size:14px">${t.text}</div><div style="font-size:18px;opacity:1;">${t.translatedText}</div>`
       : "";
   };
   {
@@ -504,13 +504,11 @@ function showTranslationBanner(videoId) {
       const lang = pill.dataset.lang;
       const label = pill.dataset.label;
 
-      // Update pill styles
       banner.querySelectorAll(".yt-tb-pill[data-lang]").forEach((p) => {
         p.classList.remove("active-ne", "active-tam");
       });
       pill.classList.add(lang === "ne" ? "active-ne" : "active-tam");
 
-      // Update status
       const dot = banner.querySelector("#yt-tb-dot");
       const statusText = banner.querySelector("#yt-tb-status-text");
       dot.classList.remove("active");
@@ -540,6 +538,7 @@ async function startTranslation(videoId, targetLang) {
   const data = await res.json();
   if (!data.success) throw new Error("Translation unsuccessful");
 
+  console.log(data.transcript);
   syncSubtitles(data.transcript);
 }
 

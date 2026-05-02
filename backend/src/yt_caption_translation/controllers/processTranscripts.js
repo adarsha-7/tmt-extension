@@ -9,18 +9,14 @@ async function translateTranscript(req, res) {
   const { videoId, targetedLang } = req.query;
   const transcripts = await extractCaption(videoId);
 
-  console.log(transcripts.slice(0, 10));
   if (!transcripts || transcripts.length === 0) {
     return res
       .status(400)
       .json({ error: "No transcript found for this video." });
   }
 
-  const videoLength =
-    transcripts.at(-1)?.offset + transcripts.at(-1)?.duration ?? 0;
-
-  // if (videoLength <= VIDEO_LENGTH_THRESHOLD) {
   const transcriptsAsSentences = createTranscriptChunks(transcripts);
+  console.log(transcriptsAsSentences.slice(0, 10));
   const translatedTranscripts = await translateSentences(
     transcriptsAsSentences,
     targetedLang,
@@ -30,7 +26,6 @@ async function translateTranscript(req, res) {
     success: true,
     transcript: distributedChunks,
   });
-  // }
 }
 
 module.exports = { translateTranscript };
