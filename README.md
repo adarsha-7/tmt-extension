@@ -149,6 +149,21 @@ tmt-extension/
 
 ## Build Project
 
+The project's backend is deployed on cloud and also contains it's local implementation.
+
+- Cloud deployment
+
+To run unzip from the release and open the manifest.json from mozilla firefox
+
+- Local deployment
+
+- Unzip the release folder
+- Run the following command:
+- cd backend
+- npm install
+- node server.js
+
+#Test
 - Follow the instructions : 
 - cd backend
 - npm install
