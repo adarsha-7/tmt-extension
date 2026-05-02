@@ -1,6 +1,6 @@
 const API_URL = "https://tmt-extension-production.up.railway.app";
-const OCR_URL = `${BASE_URL}/ocr/ocr-reading`;
-const XLAT_URL = `${BASE_URL}/ocr/translate`;
+const OCR_URL = `${API_URL}/ocr/ocr-reading`;
+const XLAT_URL = `${API_URL}/ocr/translate`;
 
 const overlayMap = new WeakMap();
 
@@ -36,7 +36,7 @@ async function handleTranslation(src, sourceLang, targetLang) {
 
     try {
         await waitForImage(imgEl);
-
+	console.log("iamge is being shown")
         const ocrRes = await fetch(OCR_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
