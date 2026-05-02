@@ -1,6 +1,6 @@
 # TMT Trilingual Translator — Firefox Extension
 
-A Firefox browser extension built for the **Google TMT Hackathon 2026**, organized by the Information and Language Processing Research Lab at Kathmandu University. The extension bridges the language gap between **English, Nepali, and Tamang** by bringing real-time translation directly into the browser — no copy-pasting, no switching tabs.
+A Firefox browser extension built for the **Google TMT Hackathon 2026**, organized by the Information and Language Processing Research Lab at Kathmandu University, aimed to promote social media literacy. The extension bridges the language gap between **English, Nepali, and Tamang** by bringing real-time translation directly into the browser — no copy-pasting, no switching tabs.
 
 Built by team **Rendezvous**.
 
@@ -59,6 +59,23 @@ Translate the full transcript of any YouTube video into your language, synced to
 - Translated subtitles appear as an overlay on the video, time-synced with the original audio
 - Words are distributed proportionally across subtitle chunks based on duration — so captions stay in sync even when translated text is longer or shorter than the original
 
+---
+
+## Feature 4 — Image Translator
+
+Extract, translate, and overlay text from images across the web.
+
+- User right clicks on an image 
+- Chooses translate image text
+- Chooses source and target language
+- Backend uses OCR (Tesseract) to detect and extract text from the image
+- Extracted text is translated between English, Nepali, and Tamang
+- Translated text is overlaid back onto the original image
+- Maintains approximate positioning for readability
+- Works on memes, screenshots, posters, and social media images
+
+---
+
 ## Project Structure
 
 tmt-extension/  
@@ -74,6 +91,10 @@ tmt-extension/
 
 ## Built With
 
+- Firefox WebExtensions API (Manifest V2)  
+- Node.js + Express  
+- Tesseract OCR  
+- TMT Translation API — Google TMT, KU ILPRL  
 - Firefox WebExtensions API (Manifest V2)
 - Node.js + Express
 - TMT Translation API — Google TMT, KU ILPRL
@@ -82,10 +103,10 @@ tmt-extension/
 
 ## Hackathon
 
-**Google TMT Hackathon 2026**
-Information and Language Processing Research Lab
-Department of Computer Science and Engineering
-Kathmandu University, Dhulikhel, Nepal
+**Google TMT Hackathon 2026**  
+Information and Language Processing Research Lab  
+Department of Computer Science and Engineering  
+Kathmandu University, Dhulikhel, Nepal  
 
-Track: Browser Plugin / Extension
-Team: Rendezvous
+Track: Browser Plugin / Extension  
+Team: Rendezvous  
