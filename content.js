@@ -247,7 +247,7 @@ function injectTranslateButton(el) {
             .filter((s) => s.length > 0) || [text];
 
         // Too long check
-        if (sentences.length > 8) {
+        if (sentences.length > 10) {
             btn.textContent = "Too long";
             btn.style.backgroundColor = "#e74c3c";
             btn.style.fontSize = "9px";

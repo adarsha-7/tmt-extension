@@ -31,7 +31,10 @@ Translate any text on any webpage instantly by simply selecting it.
 - User highlights any text on any webpage
 - A tooltip appears near the cursor showing the translation
 - No clicking, no menus — just highlight and read
-- Automatically retries up to 5 times if the API is slow or temporarily unavailable
+- Supports paragraph-level translation — selected text is split into sentences and translated individually
+- Progress indicator shows "Translating sentence 1/10..." as each sentence is processed
+- Selections exceeding 10 sentences are rejected with a warning in the tooltip
+- Automatically retries up to 5 times per sentence if the API is slow or temporarily unavailable
 - Tooltip dismisses when user clicks anywhere on the page
 
 ---
@@ -43,8 +46,12 @@ Translate text directly inside any input field on any website — comment boxes,
 - User clicks into any text box on any website
 - A small **TMT** button appears in the bottom right corner of the input
 - User types their text, clicks **TMT** — text is instantly replaced with the translation
+- Supports paragraph-level translation — text is split into sentences, each translated individually and reassembled
+- Button shows live progress (1/10, 2/10...) as each sentence is translated
+- Selections exceeding 10 sentences are rejected — button flashes red with "Too long"
 - Button changes to **↩** after translation — clicking it restores the original text
 - If the user edits the translated text, button automatically resets back to **TMT**
+- Automatically retries up to 5 times per sentence if the API is slow or temporarily unavailable
 - Supports standard textareas, input fields, and contenteditable divs (Gemini, ChatGPT, Gmail, etc.)
 
 ---
@@ -65,7 +72,7 @@ Translate the full transcript of any YouTube video into your language, synced to
 
 Extract, translate, and overlay text from images across the web.
 
-- User right clicks on an image 
+- User right clicks on an image
 - Chooses translate image text
 - Chooses source and target language
 - Backend uses OCR (Tesseract) to detect and extract text from the image
@@ -91,10 +98,10 @@ tmt-extension/
 
 ## Built With
 
-- Firefox WebExtensions API (Manifest V2)  
-- Node.js + Express  
-- Tesseract OCR  
-- TMT Translation API — Google TMT, KU ILPRL  
+- Firefox WebExtensions API (Manifest V2)
+- Node.js + Express
+- Tesseract OCR
+- TMT Translation API — Google TMT, KU ILPRL
 - Firefox WebExtensions API (Manifest V2)
 - Node.js + Express
 - TMT Translation API — Google TMT, KU ILPRL
@@ -106,7 +113,7 @@ tmt-extension/
 **Google TMT Hackathon 2026**  
 Information and Language Processing Research Lab  
 Department of Computer Science and Engineering  
-Kathmandu University, Dhulikhel, Nepal  
+Kathmandu University, Dhulikhel, Nepal
 
 Track: Browser Plugin / Extension  
-Team: Rendezvous  
+Team: Rendezvous
