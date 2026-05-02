@@ -18,7 +18,7 @@ Firefox Extension
 ↓  
 Express Proxy Server (localhost:3000)  
 ↓  
-TMT Translation API (tmt.ilprl.ku.edu.np)  
+TMT Translation API (tmt.ilprl.ku.edu.np)
 
 The extension never talks to the TMT API directly. All requests go through a local Express proxy server which keeps the API token secure and handles retries and error management.
 
@@ -49,6 +49,19 @@ Translate text directly inside any input field on any website — comment boxes,
 
 ---
 
+=======
+## Feature 3 — YouTube Transcript Translation
+
+Translate the full transcript of any YouTube video into your language, synced to the video timeline.
+
+- User opens any YouTube video with English captions
+- A translate button appears in the extension — user selects their target language and clicks Translate
+- The entire transcript is fetched, broken into natural sentences, and translated
+- Translated subtitles appear as an overlay on the video, time-synced with the original audio
+- Words are distributed proportionally across subtitle chunks based on duration — so captions stay in sync even when translated text is longer or shorter than the original
+
+---
+
 ## Feature 4 — Image Translator
 
 Extract, translate, and overlay text from images across the web.
@@ -73,16 +86,22 @@ tmt-extension/
 ├── popup/  
 ├── icons/  
 └── backend/ # Express proxy server  
-└── package.json  
+└── package.json
 
 ---
 
 ## Built With
 
+<<<<<<< HEAD
 - Firefox WebExtensions API (Manifest V2)  
 - Node.js + Express  
 - Tesseract OCR  
 - TMT Translation API — Google TMT, KU ILPRL  
+=======
+- Firefox WebExtensions API (Manifest V2)
+- Node.js + Express
+- TMT Translation API — Google TMT, KU ILPRL
+>>>>>>> origin/main
 
 ---
 
