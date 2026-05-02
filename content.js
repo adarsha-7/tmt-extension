@@ -346,23 +346,205 @@ function syncSubtitles(transcripts) {
   video.addEventListener("timeupdate", currentListener);
 }
 
-async function init(videoId) {
-  try {
-    if (!videoId) return;
+// ─── TRANSLATION BANNER ─────────────────────────────────────────
 
-    injectOverlay(); // fresh overlay, clears stale content immediately
+function removeBanner() {
+  const existing = document.getElementById("yt-translate-banner");
+  if (existing) existing.remove();
+}
 
-    const res = await fetch(
-      `http://localhost:3000/api/translate/yt?videoId=${videoId}&targetedLang=en`,
-    );
-    if (!res.ok) throw new Error("API failed");
+function showTranslationBanner(videoId) {
+  removeBanner();
 
-    const data = await res.json();
-    if (!data.success) return;
+  const banner = document.createElement("div");
+  banner.id = "yt-translate-banner";
+  banner.innerHTML = `
+    <div id="yt-tb-inner">
+      <div id="yt-tb-top">
+        <span id="yt-tb-globe">🌐</span>
+        <span id="yt-tb-question">Translate this video?</span>
+        <button id="yt-tb-close" title="Dismiss">✕</button>
+      </div>
+      <div id="yt-tb-pills">
+        <button class="yt-tb-pill" data-lang="ne" data-label="Nepali">🇳🇵 Nepali</button>
+        <button class="yt-tb-pill" data-lang="tam" data-label="Tamang">Tamang</button>
+        <button class="yt-tb-pill" id="yt-tb-skip">Skip</button>
+      </div>
+      <div id="yt-tb-status">
+        <span id="yt-tb-dot"></span>
+        <span id="yt-tb-status-text">Choose a language to get subtitles</span>
+      </div>
+    </div>
+  `;
 
-    console.log(data.transcript);
-    syncSubtitles(data.transcript);
-  } catch (err) {
-    console.error("Init error:", err);
+  const style = document.createElement("style");
+  style.id = "yt-tb-styles";
+  style.textContent = `
+    #yt-translate-banner {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999999;
+      animation: yt-tb-slidein 0.25s ease;
+    }
+    @keyframes yt-tb-slidein {
+      from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    #yt-tb-inner {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      padding: 12px 16px 10px;
+      min-width: 300px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      font-family: 'Segoe UI', sans-serif;
+    }
+    #yt-tb-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    #yt-tb-globe { font-size: 16px; }
+    #yt-tb-question {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 600;
+      color: #e2e8f0;
+      letter-spacing: 0.2px;
+    }
+    #yt-tb-close {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 13px;
+      cursor: pointer;
+      padding: 0 2px;
+      line-height: 1;
+    }
+    #yt-tb-close:hover { color: #94a3b8; }
+    #yt-tb-pills {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 10px;
+    }
+    .yt-tb-pill {
+      flex: 1;
+      padding: 7px 0;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      background: #1e293b;
+      color: #94a3b8;
+      border: 1px solid #334155;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .yt-tb-pill:hover { border-color: #475569; color: #e2e8f0; }
+    .yt-tb-pill.active-ne {
+      background: #1e3a5f;
+      color: #93c5fd;
+      border-color: #3b82f6;
+    }
+    .yt-tb-pill.active-tam {
+      background: #0f3328;
+      color: #6ee7b7;
+      border-color: #10b981;
+    }
+    #yt-tb-skip {
+      flex: 0.6;
+      background: none;
+      color: #475569;
+      border: 1px solid #1e293b;
+      font-size: 11px;
+    }
+    #yt-tb-skip:hover { color: #64748b; border-color: #334155; }
+    #yt-tb-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border-top: 1px solid #1e293b;
+      padding-top: 8px;
+    }
+    #yt-tb-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #334155;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    #yt-tb-dot.active { background: #10b981; }
+    #yt-tb-status-text {
+      font-size: 11px;
+      color: #475569;
+    }
+  `;
+
+  if (!document.getElementById("yt-tb-styles")) {
+    document.head.appendChild(style);
   }
+  document.body.appendChild(banner);
+
+  // Close button
+  banner.querySelector("#yt-tb-close").addEventListener("click", () => {
+    removeBanner();
+  });
+
+  // Skip button
+  banner.querySelector("#yt-tb-skip").addEventListener("click", () => {
+    removeBanner();
+  });
+
+  // Language pills
+  banner.querySelectorAll(".yt-tb-pill[data-lang]").forEach((pill) => {
+    pill.addEventListener("click", async () => {
+      const lang = pill.dataset.lang;
+      const label = pill.dataset.label;
+
+      // Update pill styles
+      banner.querySelectorAll(".yt-tb-pill[data-lang]").forEach((p) => {
+        p.classList.remove("active-ne", "active-tam");
+      });
+      pill.classList.add(lang === "ne" ? "active-ne" : "active-tam");
+
+      // Update status
+      const dot = banner.querySelector("#yt-tb-dot");
+      const statusText = banner.querySelector("#yt-tb-status-text");
+      dot.classList.remove("active");
+      statusText.textContent = `Loading ${label} subtitles…`;
+
+      try {
+        await startTranslation(videoId, lang);
+        dot.classList.add("active");
+        statusText.textContent = `${label} subtitles active`;
+        setTimeout(() => removeBanner(), 2000);
+      } catch (err) {
+        statusText.textContent = "Failed to load subtitles.";
+        console.error("Translation error:", err);
+      }
+    });
+  });
+}
+
+async function startTranslation(videoId, targetLang) {
+  injectOverlay();
+
+  const res = await fetch(
+    `http://localhost:3000/api/translate/yt?videoId=${videoId}&targetedLang=${targetLang}`,
+  );
+  if (!res.ok) throw new Error("API failed");
+
+  const data = await res.json();
+  if (!data.success) throw new Error("Translation unsuccessful");
+
+  syncSubtitles(data.transcript);
+}
+
+async function init(videoId) {
+  if (!videoId) return;
+  removeBanner();
+  showTranslationBanner(videoId);
 }

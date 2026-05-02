@@ -7,7 +7,7 @@ async function translateTranscript(req, res) {
   const CHUNK_SIZE = 10;
   const VIDEO_LENGTH_THRESHOLD = 10 * 60 * 1000;
   const { videoId, targetedLang } = req.query;
-  const transcripts = await extractCaption(videoId, targetedLang);
+  const transcripts = await extractCaption(videoId);
 
   console.log(transcripts.slice(0, 10));
   if (!transcripts || transcripts.length === 0) {
@@ -23,6 +23,7 @@ async function translateTranscript(req, res) {
   const transcriptsAsSentences = createTranscriptChunks(transcripts);
   const translatedTranscripts = await translateSentences(
     transcriptsAsSentences,
+    targetedLang,
   );
   const distributedChunks = distributeTranscripts(translatedTranscripts);
   return res.status(200).json({
