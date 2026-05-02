@@ -8,13 +8,14 @@
         "storage",
         "contextMenus",
         "identity",
-	"scripting",
+        "scripting",
         "http://localhost:3000/*",
         "https://tmt.ilprl.ku.edu.np/*",
+        "https://tmt-extension-production.up.railway.app/*",
         "<all_urls>"
     ],
     "background": {
-        "scripts": ["background.js" , "imageTranslator/background.js"],
+        "scripts": ["background.js", "imageTranslator/background.js"],
         "persistent": false
     },
     "content_scripts": [
@@ -22,10 +23,10 @@
             "matches": ["<all_urls>"],
             "js": ["content.js"]
         },
-	{
-	    "matches" : ["<all_urls>"],
-	    "js" : ["imageTranslator/content.js"]
-	}
+        {
+            "matches": ["<all_urls>"],
+            "js": ["imageTranslator/content.js"]
+        }
     ],
     "browser_action": {
         "default_popup": "popup/popup.html",

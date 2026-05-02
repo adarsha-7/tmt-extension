@@ -1,3 +1,4 @@
+const BASE_URL = "https://tmt-extension-production.up.railway.app";
 let tooltip = null;
 
 // ─── HIGHLIGHT TRANSLATION ───────────────────────────────────────
@@ -583,7 +584,7 @@ function showTranslationBanner(videoId) {
 async function startTranslation(videoId, targetLang) {
     injectOverlay();
 
-    const res = await fetch(`http://localhost:3000/api/translate/yt?videoId=${videoId}&targetedLang=${targetLang}`);
+    const res = await fetch(`${BASE_URL}/api/translate/yt?videoId=${videoId}&targetedLang=${targetLang}`);
     if (!res.ok) throw new Error("API failed");
 
     const data = await res.json();

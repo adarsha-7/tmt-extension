@@ -1,4 +1,4 @@
-const API_URL = "https://tmt-extension-production.up.railway.app";
+const BASE_URL = "https://tmt-extension-production.up.railway.app";
 const OCR_URL = `${BASE_URL}/ocr/ocr-reading`;
 const XLAT_URL = `${BASE_URL}/ocr/translate`;
 
