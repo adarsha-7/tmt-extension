@@ -103,7 +103,7 @@ tmt-extension/
 - TMT_API_URL=https://tmt.ilprl.ku.edu.np/lang-translate
 - TMT_API_TOKEN
 
-## Built Project
+## Build Project
 
 - Follow the instructions : 
 - cd backend
