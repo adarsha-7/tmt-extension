@@ -585,8 +585,6 @@ async function startTranslation(videoId, targetLang) {
     injectOverlay();
     console.log("here we are servering")
     const res = await fetch(`${BASE_URL}/api/translate/yt?videoId=${videoId}&targetedLang=${targetLang}`);
-    const pre_data = await res.json()
-    console.log(pre_data)
     if (!res.ok) throw new Error("API failed");
 
     const data = await res.json();
