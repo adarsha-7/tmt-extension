@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const ocrHandler = require("./src/imageTranslation/routers/imageTranslationRoute.js")
+const ocrHandler = require("./src/imageTranslation/routers/imageTranslationRoute.js");
 const axios = require("axios");
 
 const app = express();
@@ -10,67 +10,69 @@ const PORT = process.env.PORT || 3000;
 const transcriptRouter = require("./src/yt_caption_translation/routes/tanscriptRoute");
 
 app.use(cors());
-app.use(express.json({limit : '50mb'}));
+app.use(express.json({ limit: "50mb" }));
 
 app.use("/api/translate/yt", transcriptRouter);
 
 app.get("/", (req, res) => {
-  res.json({ status: "TMT Proxy Server is running!" });
+    res.json({ status: "TMT Proxy Server is running!" });
 });
 
-app.use("/ocr", ocrHandler)
+app.use("/ocr", ocrHandler);
 
 // Translation route
 app.post("/translate", async (req, res) => {
-  const { text, src_lang, tgt_lang } = req.body;
+    console.log(`📨 Translate request: "${text}" | ${src_lang} → ${tgt_lang}`);
+    const { text, src_lang, tgt_lang } = req.body;
 
-  if (!text || !src_lang || !tgt_lang) {
-    return res.status(400).json({
-      success: false,
-      error: "text, src_lang and tgt_lang are all required",
-    });
-  }
-
-  if (src_lang === tgt_lang) {
-    return res.status(400).json({
-      success: false,
-      error: "src_lang and tgt_lang must be different",
-    });
-  }
-
-  try {
-    const response = await axios.post(
-      process.env.TMT_API_URL,
-      { text, src_lang, tgt_lang },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.TMT_API_TOKEN}`,
-        },
-      },
-    );
-
-    const data = response.data;
-
-    if (data.message_type === "SUCCESS") {
-      return res.json({
-        success: true,
-        translation: data.output,
-      });
-    } else {
-      return res.status(500).json({
-        success: false,
-        error: data.message || "Translation failed",
-      });
+    if (!text || !src_lang || !tgt_lang) {
+        return res.status(400).json({
+            success: false,
+            error: "text, src_lang and tgt_lang are all required",
+        });
     }
-  } catch (err) {
-    return res.status(500).json({
-      success: false,
-      error: err.message || "Server error",
-    });
-  }
+
+    if (src_lang === tgt_lang) {
+        return res.status(400).json({
+            success: false,
+            error: "src_lang and tgt_lang must be different",
+        });
+    }
+
+    try {
+        const response = await axios.post(
+            process.env.TMT_API_URL,
+            { text, src_lang, tgt_lang },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${process.env.TMT_API_TOKEN}`,
+                },
+            },
+        );
+
+        const data = response.data;
+
+        if (data.message_type === "SUCCESS") {
+            return res.json({
+                success: true,
+                translation: data.output,
+            });
+        } else {
+            return res.status(500).json({
+                success: false,
+                error: data.message || "Translation failed",
+            });
+        }
+    } catch (err) {
+        console.error("❌ Server error:", err.message);
+        return res.status(500).json({
+            success: false,
+            error: err.message || "Server error",
+        });
+    }
 });
 
 app.listen(PORT, () => {
-  console.log(`TMT Proxy Server running on http://localhost:${PORT}`);
+    console.log(`TMT Proxy Server running on http://localhost:${PORT}`);
 });
