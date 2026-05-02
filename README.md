@@ -67,7 +67,29 @@ Translate the full transcript of any YouTube video into your language, synced to
 - Translated subtitles appear as an overlay on the video, time-synced with the original audio
 - Words are distributed proportionally across subtitle chunks based on duration — so captions stay in sync even when translated text is longer or shorter than the original
 
----
+## Architectural Design 
+
+```mermaid
+flowchart LR
+    A([Browser Extension]) -->|GET /translate| B[Express Backend]
+    B --> C[extractCaption]
+    C -->|YoutubeTranscript API| D[(Raw chunks)]
+    D --> E[createTranscriptChunks]
+    E --> F{Bracketed cue?}
+    F -->|Yes| G1[Passthrough]
+    F -->|No| G2[Sentence buffer]
+    G1 --> H[(Sentence groups)]
+    G2 --> H
+    H --> I[translateSentences]
+    I -->|Per sentence| J[translationAPI]
+    J -->|429 rate limit| K[Backoff retry x5]
+    K --> J
+    J -->|SUCCESS| L[(Translated groups)]
+    L --> M[distributeTranscripts]
+    M --> N[Word split by duration]
+    N --> O[(Synced chunks)]
+    O -->|JSON response| A
+```
 
 ## Feature 4 — Image Translator
 
@@ -82,6 +104,28 @@ Extract, translate, and overlay text from images across the web.
 - Maintains approximate positioning for readability
 - Works on memes, screenshots, posters, and social media images
 
+##Architectural Design 
+
+```mermaid
+flowchart LR
+    A([Browser Extension]) -->|Image as chunks| B[Express Backend]
+    B --> C[Sharp module]
+    C -->|Sharpened image| D[Tesseract.js OCR]
+    D -->|Line + position coords| E[Text Extraction]
+    E --> F{Y coordinates\ncompact?}
+    F -->|Yes| G[Group as\none sentence]
+    F -->|No| H[Separate\nsentences]
+    G --> I[(Sentence groups\nwith bbox)]
+    H --> I
+    I --> J[TMT Translation API]
+    J -->|Error| K[Exponential backoff\nretry]
+    K --> J
+    J -->|SUCCESS| L[(Translated text\n+ bbox values)]
+    L --> M[Send bbox +\ntranslation to extension]
+    M --> N[Draw blurred rect\nover original bbox]
+    N --> O[Render translated\ntext on overlay]
+    O --> A
+```
 ---
 
 ## Project Structure
