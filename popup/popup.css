@@ -1,33 +1,130 @@
-/* Toggle Switch */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 300px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0f0f1a;
+    color: #eaeaea;
+    overflow: hidden;
+}
+
+/* Animated background */
+body::before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(123, 140, 222, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(100, 220, 180, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    padding-bottom: 14px;
+    position: relative;
+}
+
+.header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #7b8cde, transparent);
+}
+
+.logo-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.logo-icon {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #7b8cde, #64dcb4);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.header h1 {
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #7b8cde, #64dcb4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.5px;
+}
+
+.header p {
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+/* Toggle Section */
 .toggle-section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid #2e2e4e;
+    background: rgba(123, 140, 222, 0.07);
+    border: 1px solid rgba(123, 140, 222, 0.15);
+    border-radius: 12px;
+    padding: 10px 14px;
 }
 
 .toggle-label {
-    font-size: 13px;
+    font-size: 12px;
     color: #aaa;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-weight: 600;
 }
 
 #toggle-status {
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 11px;
+    font-weight: 700;
     color: #4caf50;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     min-width: 55px;
     text-align: right;
 }
 
-/* The switch container */
+/* Switch */
 .switch {
     position: relative;
     display: inline-block;
-    width: 44px;
-    height: 24px;
+    width: 40px;
+    height: 22px;
 }
 
 .switch input {
@@ -36,7 +133,6 @@
     height: 0;
 }
 
-/* The slider */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -44,27 +140,158 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #444;
-    border-radius: 24px;
+    background-color: #2a2a3e;
+    border-radius: 22px;
     transition: 0.3s;
+    border: 1px solid #333;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 18px;
-    width: 18px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: #555;
     border-radius: 50%;
     transition: 0.3s;
 }
 
 input:checked + .slider {
-    background-color: #7b8cde;
+    background: linear-gradient(135deg, #7b8cde, #64dcb4);
+    border-color: transparent;
 }
 
 input:checked + .slider:before {
-    transform: translateX(20px);
+    transform: translateX(18px);
+    background-color: white;
+}
+
+/* Language Cards */
+.lang-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    padding: 12px 14px;
+    transition: border-color 0.2s;
+}
+
+.lang-card:hover {
+    border-color: rgba(123, 140, 222, 0.3);
+}
+
+.lang-card label {
+    display: block;
+    font-size: 10px;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.lang-card select {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(123, 140, 222, 0.2);
+    background-color: rgba(123, 140, 222, 0.08);
+    color: #eaeaea;
+    font-size: 13px;
+    cursor: pointer;
+    outline: none;
+    transition:
+        border-color 0.2s,
+        background-color 0.2s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237b8cde'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 28px;
+}
+
+.lang-card select:focus {
+    border-color: #7b8cde;
+    background-color: rgba(123, 140, 222, 0.12);
+}
+
+.lang-card select option {
+    background-color: #1a1a2e;
+    color: #eaeaea;
+}
+
+/* Arrow between languages */
+.lang-arrow {
+    text-align: center;
+    color: #7b8cde;
+    font-size: 16px;
+    margin: -6px 0;
+    opacity: 0.6;
+}
+
+/* Save Button */
+#save-btn {
+    padding: 11px;
+    background: linear-gradient(135deg, #7b8cde, #64dcb4);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        opacity 0.2s,
+        transform 0.1s;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+#save-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+#save-btn:active {
+    transform: translateY(0px);
+}
+
+/* Status */
+.status {
+    text-align: center;
+    font-size: 12px;
+    color: #4caf50;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.2);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding-top: 10px;
+    position: relative;
+}
+
+.footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #222, transparent);
+}
+
+.footer p {
+    font-size: 10px;
+    color: #444;
+    letter-spacing: 1px;
 }

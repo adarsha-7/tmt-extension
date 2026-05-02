@@ -10,7 +10,10 @@
         <div class="container">
             <!-- Header -->
             <div class="header">
-                <h1>TMT Translator</h1>
+                <div class="logo-row">
+                    <div class="logo-icon">🌐</div>
+                    <h1>TMT Translator</h1>
+                </div>
                 <p>Trilingual · Real-time · Web</p>
             </div>
 
@@ -25,21 +28,23 @@
             </div>
 
             <!-- Language Selection -->
-            <div class="section">
+            <div class="lang-card">
                 <label for="src-lang">Translate From</label>
                 <select id="src-lang">
-                    <option value="en">English</option>
-                    <option value="ne">Nepali</option>
-                    <option value="tmg">Tamang</option>
+                    <option value="en">🇬🇧 English</option>
+                    <option value="ne">🇳🇵 Nepali</option>
+                    <option value="tmg">🏔️ Tamang</option>
                 </select>
             </div>
 
-            <div class="section">
+            <div class="lang-arrow">↕</div>
+
+            <div class="lang-card">
                 <label for="tgt-lang">Translate To</label>
                 <select id="tgt-lang">
-                    <option value="ne">Nepali</option>
-                    <option value="en">English</option>
-                    <option value="tmg">Tamang</option>
+                    <option value="ne">🇳🇵 Nepali</option>
+                    <option value="en">🇬🇧 English</option>
+                    <option value="tmg">🏔️ Tamang</option>
                 </select>
             </div>
 
@@ -47,7 +52,7 @@
             <button id="save-btn">Save Settings</button>
 
             <!-- Status Message -->
-            <div id="status" class="status hidden">Settings saved!</div>
+            <div id="status" class="status hidden">✓ Settings saved!</div>
 
             <!-- Footer -->
             <div class="footer">
