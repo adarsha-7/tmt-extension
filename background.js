@@ -1,4 +1,4 @@
-const API_URL = "https://tmt-extension-production.up.railway.app/translate";
+const API_URL = "https://proactive-sparkle-production.up.railway.app/translate";
 
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "translate") {

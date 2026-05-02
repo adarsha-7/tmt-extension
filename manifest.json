@@ -11,7 +11,7 @@
         "scripting",
         "http://localhost:3000/*",
         "https://tmt.ilprl.ku.edu.np/*",
-        "https://tmt-extension-production.up.railway.app/*",
+        "https://proactive-sparkle-production.up.railway.app*",
         "<all_urls>"
     ],
     "background": {

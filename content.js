@@ -1,4 +1,4 @@
-const BASE_URL = "https://tmt-extension-production.up.railway.app";
+const BASE_URL = "https://proactive-sparkle-production.up.railway.app";
 let tooltip = null;
 
 // ─── HIGHLIGHT TRANSLATION ───────────────────────────────────────
