@@ -504,13 +504,11 @@ function showTranslationBanner(videoId) {
       const lang = pill.dataset.lang;
       const label = pill.dataset.label;
 
-      // Update pill styles
       banner.querySelectorAll(".yt-tb-pill[data-lang]").forEach((p) => {
         p.classList.remove("active-ne", "active-tam");
       });
       pill.classList.add(lang === "ne" ? "active-ne" : "active-tam");
 
-      // Update status
       const dot = banner.querySelector("#yt-tb-dot");
       const statusText = banner.querySelector("#yt-tb-status-text");
       dot.classList.remove("active");
