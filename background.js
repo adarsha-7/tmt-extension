@@ -8,7 +8,7 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-async function translateText(text, src_lang, tgt_lang, retries = 2) {
+async function translateText(text, src_lang, tgt_lang, retries = 5) {
     try {
         const response = await fetch(API_URL, {
             method: "POST",
@@ -27,7 +27,8 @@ async function translateText(text, src_lang, tgt_lang, retries = 2) {
         }
     } catch (err) {
         if (retries > 0) {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            console.log("Unable to reach server. Trying again...");
+            await new Promise((resolve) => setTimeout(resolve, 800));
             return translateText(text, src_lang, tgt_lang, retries - 1);
         }
         throw err;
