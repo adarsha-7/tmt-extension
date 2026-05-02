@@ -1,4 +1,5 @@
-const API_URL = "https://tmt-extension-production.up.railway.app/translate";
+const API_URL = "http://localhost:3000/translate";
+
 
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "translate") {

@@ -1,4 +1,4 @@
-const API_URL = "https://tmt-extension-production.up.railway.app";
+const API_URL = "http://localhost:3000";
 const OCR_URL = `${API_URL}/ocr/ocr-reading`;
 const XLAT_URL = `${API_URL}/ocr/translate`;
 

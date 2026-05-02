@@ -12,6 +12,7 @@
         "http://localhost:3000/*",
         "https://tmt.ilprl.ku.edu.np/*",
         "https://tmt-extension-production.up.railway.app/*",
+	"https://tmt-extension.onrender.com/*",
         "<all_urls>"
     ],
     "background": {

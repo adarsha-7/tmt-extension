@@ -1,4 +1,4 @@
-const BASE_URL = "https://tmt-extension-production.up.railway.app";
+const BASE_URL = "http://localhost:3000";
 let tooltip = null;
 
 // ─── HIGHLIGHT TRANSLATION ───────────────────────────────────────
