@@ -22,8 +22,8 @@ app.use("/ocr", ocrHandler);
 
 // Translation route
 app.post("/translate", async (req, res) => {
-    console.log(`📨 Translate request: "${text}" | ${src_lang} → ${tgt_lang}`);
     const { text, src_lang, tgt_lang } = req.body;
+    console.log(`📨 Translate request: "${text}" | ${src_lang} → ${tgt_lang}`);
 
     if (!text || !src_lang || !tgt_lang) {
         return res.status(400).json({
