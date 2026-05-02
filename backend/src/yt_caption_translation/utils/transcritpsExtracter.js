@@ -11,6 +11,5 @@ async function extractCaption(videoID) {
   }
 }
 
-extractCaption("cOAaonpTLlc");
 
 module.exports = { extractCaption };
