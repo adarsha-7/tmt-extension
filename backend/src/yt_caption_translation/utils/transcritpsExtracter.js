@@ -1,4 +1,4 @@
-const { YoutubeTranscript } = require("@danielxceron/youtube-transcript");
+const { YoutubeTranscript } = require("youtube-transcript");
 
 async function extractCaption(videoID) {
   try {
