@@ -59,39 +59,6 @@ Translate the full transcript of any YouTube video into your language, synced to
 - Translated subtitles appear as an overlay on the video, time-synced with the original audio
 - Words are distributed proportionally across subtitle chunks based on duration — so captions stay in sync even when translated text is longer or shorter than the original
 
-# System Design
-┌─────────────────────────────────────────────────────────────┐
-│                     Browser Extension                       │
-│  - Detects active YouTube video                             │
-│  - Sends videoId + target language to backend               │
-│  - Renders translated captions as overlay subtitles         │
-└───────────────────────┬─────────────────────────────────────┘
-                        │ GET /translate?videoId=...&targetedLang=ne
-                        ▼
-┌─────────────────────────────────────────────────────────────┐
-│                      Express Backend                        │
-│                                                             │
-│  1. extractCaption(videoId)                                 │
-│     └─ YoutubeTranscript → raw timestamped chunks           │
-│                                                             │
-│  2. createTranscriptChunks(transcripts)                     │
-│     └─ Groups chunks into natural sentences                 │
-│        Handles [bracketed] and (parenthetical) cues         │
-│                                                             │
-│  3. translateSentences(sentenceGroups, targetLang)          │
-│     └─ Calls Translation API per sentence                   │
-│        Retries on 429 with exponential backoff              │
-│                                                             │
-│  4. distributeTranscripts(translatedGroups)                 │
-│     └─ Maps translated words back to original timestamps    │
-│        Proportional to each chunk's duration                │
-└───────────────────────┬─────────────────────────────────────┘
-                        │
-                        ▼
-             ┌─────────────────────┐
-             │  Translation API    │
-             │      (TMT )         │
-             └─────────────────────┘
 ## Project Structure
 
 tmt-extension/  
