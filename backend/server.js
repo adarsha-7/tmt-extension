@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const ocrHandler = require("./src/imageTranslation/routers/imageTranslationRoute.js")
 const axios = require("axios");
 
 const app = express();
@@ -9,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 const transcriptRouter = require("./src/yt_caption_translation/routes/tanscriptRoute");
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({limit : '50mb'}));
 
 app.use("/api/translate/yt", transcriptRouter);
 
@@ -17,6 +18,9 @@ app.get("/", (req, res) => {
   res.json({ status: "TMT Proxy Server is running!" });
 });
 
+app.use("/ocr", ocrHandler)
+
+// Translation route
 app.post("/translate", async (req, res) => {
   const { text, src_lang, tgt_lang } = req.body;
 
