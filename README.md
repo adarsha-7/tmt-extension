@@ -4,6 +4,7 @@ A Firefox browser extension built for the **Google TMT Hackathon 2026**, organiz
 
 Built by team **Rendezvous**.
 
+
 ---
 
 ## Supported Language Directions
@@ -96,6 +97,20 @@ tmt-extension/
 
 ---
 
+## Environment File
+
+- Is stored inside of tmt-extension/backend
+- TMT_API_URL=https://tmt.ilprl.ku.edu.np/lang-translate
+- TMT_API_TOKEN
+
+## Built Project
+
+- Follow the instructions : 
+- cd backend
+- npm install
+- node server.js
+- open manifest.json from firefox
+
 ## Built With
 
 - Firefox WebExtensions API (Manifest V2)
@@ -117,3 +132,5 @@ Kathmandu University, Dhulikhel, Nepal
 
 Track: Browser Plugin / Extension  
 Team: Rendezvous
+
+
