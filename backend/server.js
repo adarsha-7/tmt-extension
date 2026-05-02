@@ -65,7 +65,7 @@ app.post("/translate", async (req, res) => {
             });
         }
     } catch (err) {
-        console.error("❌ Server error:", err.message);
+        console.error("Server error:", err.message);
         return res.status(500).json({
             success: false,
             error: err.message || "Server error",
