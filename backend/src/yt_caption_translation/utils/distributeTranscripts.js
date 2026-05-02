@@ -8,12 +8,11 @@ function distributeTranscripts(sentenceGroup) {
       }
 
       if (chunks.length === 1) {
-        return [{ ...chunks[0], text, translatedText: translatedText }];
+        return [{ ...chunks[0], text: chunks[0].text, translatedText }];
       }
 
       const words = translatedText.split(" ");
       const totalDuration = chunks.reduce((sum, c) => sum + c.duration, 0);
-
       const result = [];
       let wordIndex = 0;
 
@@ -22,17 +21,17 @@ function distributeTranscripts(sentenceGroup) {
         const ratio = chunk.duration / totalDuration;
         const wordCount = isLast
           ? words.length - wordIndex
-          : Math.round(words.length * ratio);
+          : Math.max(1, Math.round(words.length * ratio));
 
         result.push({
           ...chunk,
-          text,
+          text: chunk.text,
           translatedText: words
             .slice(wordIndex, wordIndex + wordCount)
             .join(" "),
         });
 
-        wordIndex += wordCount;
+        wordIndex = Math.min(wordIndex + wordCount, words.length);
       });
 
       return result;

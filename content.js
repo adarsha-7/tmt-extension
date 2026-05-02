@@ -338,7 +338,7 @@ function syncSubtitles(transcripts) {
         currentTime >= seg.offset && currentTime <= seg.offset + seg.duration,
     );
     overlay.innerHTML = t
-      ? `<div>${t.text}</div><div style="font-size:16px;opacity:0.8;">${t.translatedText}</div>`
+      ? `<div style="opacity:0.8,font-size:14px">${t.text}</div><div style="font-size:18px;opacity:1;">${t.translatedText}</div>`
       : "";
   };
   {
@@ -538,6 +538,7 @@ async function startTranslation(videoId, targetLang) {
   const data = await res.json();
   if (!data.success) throw new Error("Translation unsuccessful");
 
+  console.log(data.transcript);
   syncSubtitles(data.transcript);
 }
 
