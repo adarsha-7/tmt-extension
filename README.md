@@ -49,7 +49,6 @@ Translate text directly inside any input field on any website — comment boxes,
 
 ---
 
-=======
 ## Feature 3 — YouTube Transcript Translation
 
 Translate the full transcript of any YouTube video into your language, synced to the video timeline.
@@ -92,7 +91,6 @@ tmt-extension/
 
 ## Built With
 
-<<<<<<< HEAD
 - Firefox WebExtensions API (Manifest V2)  
 - Node.js + Express  
 - Tesseract OCR  
@@ -101,7 +99,6 @@ tmt-extension/
 - Firefox WebExtensions API (Manifest V2)
 - Node.js + Express
 - TMT Translation API — Google TMT, KU ILPRL
->>>>>>> origin/main
 
 ---
 
