@@ -1,9 +1,9 @@
 const { YoutubeTranscript } = require("youtube-transcript");
 
-async function extractCaption(videoID, targetedLang) {
+async function extractCaption(videoID) {
   try {
     const transcript = await YoutubeTranscript.fetchTranscript(videoID, {
-      lang: targetedLang,
+      lang: "en",
     });
     return transcript;
   } catch (err) {
