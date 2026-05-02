@@ -7,6 +7,7 @@ WORKDIR /app
 COPY backend/package*.json ./
 
 RUN npm install --production
+RUN npm install node-addon-api
 
 COPY backend/ .
 
