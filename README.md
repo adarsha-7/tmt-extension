@@ -95,7 +95,6 @@ tmt-extension/
 - Node.js + Express  
 - Tesseract OCR  
 - TMT Translation API — Google TMT, KU ILPRL  
-=======
 - Firefox WebExtensions API (Manifest V2)
 - Node.js + Express
 - TMT Translation API — Google TMT, KU ILPRL
